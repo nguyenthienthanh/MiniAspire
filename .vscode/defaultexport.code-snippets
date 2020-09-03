@@ -1,0 +1,10 @@
+{
+  "React native default export component": {
+    "prefix": "excd",
+    "body": [
+      "export { default } from './${TM_DIRECTORY/^.+\\/(.*)$/$1/}'",
+      "export * from './${TM_DIRECTORY/^.+\\/(.*)$/$1/}'",
+      ""
+    ]
+  }
+}

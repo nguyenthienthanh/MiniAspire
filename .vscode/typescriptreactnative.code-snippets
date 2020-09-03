@@ -1,0 +1,20 @@
+{
+  "React native function component": {
+    "prefix": "rnfc",
+    "body": [
+      "import React, { FC } from 'react'",
+      "import { View, Text, StyleSheet } from 'react-native'",
+      "",
+      "export type ${1:${TM_FILENAME_BASE}}Props = {$2}",
+      "",
+      "const ${1:${TM_FILENAME_BASE}}: FC<${1:${TM_FILENAME_BASE}}Props> = (props) => {",
+      "\treturn (${3:\n\t\t<View>\n\t\t\t<Text>\n\t\t\t</Text>\n\t\t</View>}\n\t)",
+      "}",
+      "",
+      "export default ${1:${TM_FILENAME_BASE}}",
+      "",
+      "const styles = StyleSheet.create({})",
+      ""
+    ]
+  }
+}
