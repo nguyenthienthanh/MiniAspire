@@ -6,7 +6,6 @@ import {
   StatusBarProps,
   View,
 } from 'react-native'
-import { Colors } from 'react-native/Libraries/NewAppScreen'
 import { useTheme } from '@react-navigation/native'
 
 export type ContainerProps = {

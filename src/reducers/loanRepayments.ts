@@ -26,7 +26,7 @@ const loanRepaymentsReducer = (
   switch (action.type) {
     case REPAY_LOAN_SUCCESS:
       return update(state, {
-        data: { $push: [action.loanRepayment] },
+        data: { $unshift: [action.loanRepayment] },
       })
     case FETCH_LOAN_REPAYMENTS_REQUESTED:
       return update(state, {

@@ -37,8 +37,8 @@ const loanReducer = (
       })
     case FETCH_CURRENT_LOAN_REQUESTED:
       return update(state, {
-        $set: {
-          loading: true,
+        loading: {
+          $set: true,
         },
       })
     case FETCH_CURRENT_LOAN_SUCCESS:
@@ -52,6 +52,7 @@ const loanReducer = (
       return update(state, {
         $set: {
           loading: false,
+          data: state.data,
           error: action.error,
         },
       })

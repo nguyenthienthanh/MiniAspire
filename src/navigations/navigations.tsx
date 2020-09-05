@@ -10,12 +10,14 @@ import {
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import LoanInformationScreen from '../screens/LoanInformationScreen'
 import RepaymentScreen from '../screens/RepaymentScreen'
+import { colors } from 'react-native-elements'
 
 const BottomTab = createBottomTabNavigator()
 
 const MyDarkTheme: Theme = {
   dark: true,
   colors: {
+    ...colors,
     primary: 'rgb(255, 45, 85)',
     background: 'rgb(242, 242, 242)',
     card: 'rgb(255, 255, 255)',
