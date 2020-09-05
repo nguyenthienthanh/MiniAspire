@@ -1,4 +1,4 @@
-package com.miniaspire;
+package com.thanh.miniaspire;
 
 import com.facebook.react.ReactActivity;
 

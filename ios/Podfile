@@ -10,6 +10,8 @@ target 'MiniAspire' do
 
   pod 'react-native-config', :path => '../node_modules/react-native-config'
 
+
+
   target 'MiniAspireTests' do
     inherit! :complete
     # Pods for testing

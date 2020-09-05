@@ -7,16 +7,23 @@ import {
   View,
 } from 'react-native'
 import { Colors } from 'react-native/Libraries/NewAppScreen'
+import { useTheme } from '@react-navigation/native'
 
 export type ContainerProps = {
   barStyle?: StatusBarProps['barStyle']
 }
 
 const Container: FC<ContainerProps> = (props) => {
+  const { colors } = useTheme()
+
   return (
-    <View style={styles.root}>
-      <StatusBar barStyle={props.barStyle} translucent />
-      <SafeAreaView>{props.children}</SafeAreaView>
+    <View style={{ backgroundColor: colors.background }}>
+      <StatusBar
+        barStyle={props.barStyle}
+        translucent
+        backgroundColor="transparent"
+      />
+      <SafeAreaView style={styles.container}>{props.children}</SafeAreaView>
     </View>
   )
 }
@@ -28,7 +35,7 @@ Container.defaultProps = {
 export default Container
 
 const styles = StyleSheet.create({
-  root: {
-    backgroundColor: Colors.lighter,
+  container: {
+    paddingTop: StatusBar.currentHeight,
   },
 })
