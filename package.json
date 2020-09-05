@@ -9,6 +9,8 @@
     "start:server": "json-server --watch src/db.json",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
+    "build:android:clean": "(cd android; ./gradlew clean)",
+    "build:android": "REACT_NATIVE_MAX_WORKERS=2 && (cd android && ./gradlew assembleRelease)",
     "start": "react-native start",
     "test": "jest",
     "lint": "tslint src/{ts,tsx} --fix"

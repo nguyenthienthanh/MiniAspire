@@ -60,3 +60,4 @@ buck-out/
 
 .env.development
 .env.test
+*.local
