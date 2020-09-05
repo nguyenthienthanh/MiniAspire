@@ -15,7 +15,8 @@
   },
   "dependencies": {
     "@react-native-community/async-storage": "1.12.0",
-    "json-server": "0.16.1",
+    "date-fns": "2.16.1",
+    "miragejs": "0.1.40",
     "react": "16.13.1",
     "react-native": "0.63.2",
     "react-native-config": "1.3.3",

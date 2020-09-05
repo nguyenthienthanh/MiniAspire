@@ -21,6 +21,8 @@ import { PersistGate as ReduxPersistGate } from 'redux-persist/integration/react
 import Container from './src/components/Container'
 import store, { persistor } from './src/stores'
 
+import './src/fakeApi'
+
 declare const global: { HermesInternal: null | {} }
 
 const App = () => {
