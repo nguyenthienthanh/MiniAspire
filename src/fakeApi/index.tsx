@@ -11,6 +11,7 @@ if ((window as any).server) {
       id: 'loan-1',
       amount: 312000000,
       weeklyAmount: 2000000,
+      weeklyRepaid: false,
       term: new Date('09/09/2023'),
     }))
 
@@ -33,7 +34,7 @@ if ((window as any).server) {
       },
     ])
 
-    this.post('loan/repay', () => ({
+    this.post('loan/:id/repay', () => ({
       amount: 2000000,
       repaymentsAt: new Date('09/05/2020'),
     }))
