@@ -31,6 +31,7 @@ export const MyDarkTheme: Theme = {
     ...DarkTheme.colors,
     white: '#fff',
     primary: '#01D167',
+    secondary: '#FFF',
   } as any,
 }
 
@@ -41,6 +42,7 @@ export const MyLightTheme: Theme = {
     ...DefaultTheme.colors,
     white: '#fff',
     primary: '#01D167',
+    secondary: '#0C365A',
   } as any,
 }
 
