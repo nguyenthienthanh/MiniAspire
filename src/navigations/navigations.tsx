@@ -1,30 +1,47 @@
 import React, { useCallback } from 'react'
-import { useColorScheme } from 'react-native'
+import { useColorScheme, View } from 'react-native'
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import {
   DefaultTheme,
+  DarkTheme,
   NavigationContainer,
   Theme,
 } from '@react-navigation/native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import LoanInformationScreen from '../screens/LoanInformationScreen'
 import RepaymentScreen from '../screens/RepaymentScreen'
+import {
+  AspireIcon,
+  CreditIcon,
+  PaymentIcon,
+  ProfileIcon,
+  CardIcon,
+} from '../assets/icons'
+import DefaultScreen from '../screens/DefaultScreen'
 import { colors } from 'react-native-elements'
+import DebitCardScreen from '../screens/DebitCardScreen'
 
 const BottomTab = createBottomTabNavigator()
 
-const MyDarkTheme: Theme = {
+export const MyDarkTheme: Theme = {
   dark: true,
   colors: {
     ...colors,
-    primary: 'rgb(255, 45, 85)',
-    background: 'rgb(242, 242, 242)',
-    card: 'rgb(255, 255, 255)',
-    text: 'rgb(244, 244, 244)',
-    border: 'rgb(199, 199, 204)',
-    notification: 'rgb(255, 69, 58)',
-  },
+    ...DarkTheme.colors,
+    white: '#fff',
+    primary: '#01D167',
+  } as any,
+}
+
+export const MyLightTheme: Theme = {
+  dark: false,
+  colors: {
+    ...colors,
+    ...DefaultTheme.colors,
+    white: '#fff',
+    primary: '#01D167',
+  } as any,
 }
 
 const AppNavigator = () => {
@@ -32,47 +49,96 @@ const AppNavigator = () => {
 
   const screenOptions = useCallback(
     ({ route }) => ({
-      tabBarIcon: ({ focused, color, size }: any) => {
-        let iconName = 'account-cash'
+      tabBarIcon: ({ color }: any) => {
+        let IconComponent = null
 
-        if (route.name === 'LoanInformationScreen') {
-          iconName = focused ? 'account-cash' : 'account-cash-outline'
-        } else if (route.name === 'RepaymentScreen') {
-          iconName = focused ? 'cash-refund' : 'cash-refund'
+        switch (route.name) {
+          case 'HomeScreen':
+            IconComponent = AspireIcon
+            break
+          case 'DebitCardScreen':
+            IconComponent = CardIcon
+            break
+          case 'PaymentsScreen':
+            IconComponent = PaymentIcon
+            break
+          case 'CreditScreen':
+            IconComponent = CreditIcon
+            break
+          case 'ProfileScreen':
+            IconComponent = ProfileIcon
+            break
+        }
+
+        if (!IconComponent) {
+          return null
         }
 
         // You can return any component that you like here!
-        return (
-          <MaterialCommunityIcons name={iconName} size={size} color={color} />
-        )
+        return <IconComponent fill={color} />
       },
     }),
     [],
   )
 
   return (
-    <NavigationContainer theme={scheme === 'dark' ? MyDarkTheme : DefaultTheme}>
+    <NavigationContainer theme={scheme === 'dark' ? MyDarkTheme : MyLightTheme}>
       <BottomTab.Navigator
         lazy
         screenOptions={screenOptions}
         tabBarOptions={{
           labelStyle: {
-            fontSize: 13,
+            fontSize: 12,
+            fontFamily: 'AvenirNext-Medium',
           },
+          tabStyle: {
+            height: 56,
+          },
+          style: {
+            shadowColor: '#000',
+            shadowOffset: {
+              width: 0,
+              height: 3,
+            },
+            shadowOpacity: 0.27,
+            shadowRadius: 4.65,
+
+            elevation: 6,
+          },
+          inactiveTintColor: '#ddd',
         }}
-        initialRouteName="LoanInformationScreen"
+        initialRouteName="DebitCardScreen"
       >
         <BottomTab.Screen
-          name="LoanInformationScreen"
-          component={LoanInformationScreen}
+          name="HomeScreen"
+          component={DefaultScreen}
           options={{
-            title: 'LoanInformation',
+            title: 'Home',
           }}
         />
+
         <BottomTab.Screen
-          name="RepaymentScreen"
-          component={RepaymentScreen}
-          options={{ title: 'Repayment' }}
+          name="DebitCardScreen"
+          component={DebitCardScreen}
+          options={{ title: 'Debit Card' }}
+        />
+
+        <BottomTab.Screen
+          name="PaymentsScreen"
+          component={DefaultScreen}
+          options={{ title: 'Payments' }}
+        />
+
+        <BottomTab.Screen
+          name="CreditScreen"
+          component={DefaultScreen}
+          options={{ title: 'Credit' }}
+        />
+
+        <BottomTab.Screen
+          name="ProfileScreen"
+          component={DefaultScreen}
+          options={{ title: 'Profile' }}
         />
       </BottomTab.Navigator>
     </NavigationContainer>

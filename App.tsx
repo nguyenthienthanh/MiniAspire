@@ -4,11 +4,14 @@ import { ActivityIndicator, useColorScheme } from 'react-native'
 import { Provider as ReactReduxProvider } from 'react-redux'
 import { PersistGate as ReduxPersistGate } from 'redux-persist/integration/react'
 import './src/fakeApi'
-import AppNavigator from './src/navigations/navigations'
+import AppNavigator, {
+  MyLightTheme,
+  MyDarkTheme,
+} from './src/navigations/navigations'
 import store, { persistor } from './src/stores'
 import { ThemeProvider, Theme, colors } from 'react-native-elements'
 
-const DefaultTheme: Theme = {
+const MyRNElementsDefaultTheme: Theme = {
   ListItemTitle: {
     style: {
       fontSize: 13,
@@ -19,14 +22,17 @@ const DefaultTheme: Theme = {
       fontSize: 12,
     },
   },
-  colors,
-}
-
-const MyDarkTheme: Theme = {
-  ...DefaultTheme,
   colors: {
     ...colors,
-    primary: 'rgb(255, 45, 85)',
+    ...MyLightTheme.colors,
+  },
+}
+
+const MyRNElementsDarkTheme: Theme = {
+  ...MyRNElementsDefaultTheme,
+  colors: {
+    ...colors,
+    ...MyDarkTheme.colors,
   },
 }
 
@@ -34,7 +40,8 @@ const App = () => {
   const scheme = useColorScheme()
 
   const theme = useMemo(
-    () => (scheme === 'dark' ? MyDarkTheme : DefaultTheme),
+    () =>
+      scheme === 'dark' ? MyRNElementsDarkTheme : MyRNElementsDefaultTheme,
     [scheme],
   )
 

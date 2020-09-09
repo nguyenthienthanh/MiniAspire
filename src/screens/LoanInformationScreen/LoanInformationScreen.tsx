@@ -29,6 +29,7 @@ const LoanInformationScreen: FC<LoanInformationScreenProps> = (props) => {
       <Card>
         <Card.Title testID="loanInformationTitle">Loan</Card.Title>
         <Card.Divider />
+
         {loan.loading && !loan.data ? (
           <ActivityIndicator />
         ) : (

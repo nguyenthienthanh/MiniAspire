@@ -10,13 +10,20 @@ import { useTheme } from '@react-navigation/native'
 
 export type ContainerProps = {
   barStyle?: StatusBarProps['barStyle']
+  variant?: 'light' | 'default'
 }
 
 const Container: FC<ContainerProps> = (props) => {
-  const { colors } = useTheme()
+  const { colors } = useTheme() as any
 
   return (
-    <View style={{ backgroundColor: colors.background }}>
+    <View
+      style={{
+        flex: 1,
+        backgroundColor:
+          props.variant === 'light' ? colors.white : colors.background,
+      }}
+    >
       <StatusBar
         barStyle={props.barStyle}
         translucent
