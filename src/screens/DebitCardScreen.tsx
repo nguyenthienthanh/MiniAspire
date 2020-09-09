@@ -5,13 +5,60 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  Switch,
 } from 'react-native'
 import Container from '../components/Container'
 import { useTheme } from '@react-navigation/native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-import { AspireLogo, VisaLogo } from '../assets/icons'
+import {
+  AspireLogo,
+  VisaLogo,
+  TopUpIcon,
+  SpendingIcon,
+  FreezeIcon,
+  NewCardIcon,
+  DeactivatedIcon,
+} from '../assets/icons'
+import { SvgProps } from 'react-native-svg'
 
 export type DebitCardScreenProps = {}
+
+const menuItems: MenuItemProps[] = [
+  {
+    title: 'Top-up account',
+    subtitle: 'Deposit money to your account to use with card',
+    icon: TopUpIcon,
+  },
+  {
+    title: 'Weekly spending limit',
+    subtitle: 'You haven’t set any spending limit on card',
+    icon: SpendingIcon,
+    rightActions: (
+      <Switch style={{ transform: [{ scaleX: 0.7 }, { scaleY: 0.7 }] }} />
+    ),
+  },
+  {
+    title: 'Freeze card',
+    subtitle: 'Your debit card is currently active',
+    icon: FreezeIcon,
+    rightActions: (
+      <Switch
+        style={{ transform: [{ scaleX: 0.7 }, { scaleY: 0.7 }] }}
+        value={true}
+      />
+    ),
+  },
+  {
+    title: 'Deactivate and get new card',
+    subtitle: 'This deactives your current debit card',
+    icon: NewCardIcon,
+  },
+  {
+    title: 'Deactivated cards',
+    subtitle: 'Your previously deactivated cards',
+    icon: DeactivatedIcon,
+  },
+]
 
 const DebitCardScreen: FC<DebitCardScreenProps> = (props) => {
   const { colors } = useTheme() as any
@@ -102,12 +149,20 @@ const DebitCardScreen: FC<DebitCardScreenProps> = (props) => {
           <VisaLogo style={styles.debitCardLogo} />
         </View>
       </View>
-      {/* 
+
       <View style={styles.menuList}>
-        {new Array(100).fill(1).map(() => (
-          <Text>asd</Text>
-        ))}
-      </View> */}
+        {menuItems.map((item, index) => {
+          return (
+            <MenuItem
+              key={index}
+              title={item.title}
+              subtitle={item.subtitle}
+              icon={item.icon}
+              rightActions={item.rightActions}
+            />
+          )
+        })}
+      </View>
     </Container>
   )
 }
@@ -122,6 +177,30 @@ const CardNumberItem: FC<CardNumberItemProps> = (props) => {
     <Text style={styles.debitCardNumberItem}>
       {props.hidden ? '●●●●' : props.value}
     </Text>
+  )
+}
+
+type MenuItemProps = {
+  icon: React.FC<SvgProps>
+  title: string
+  subtitle: string
+  rightActions?: any
+}
+
+const MenuItem: FC<MenuItemProps> = (props) => {
+  return (
+    <View style={styles.menuItemContainer}>
+      <props.icon width={32} height={32} style={{ flex: 2 }} />
+
+      <View style={styles.menuItemText}>
+        <Text style={styles.menuItemTitle}>{props.title}</Text>
+        <Text style={styles.menuItemSubtitle}>{props.subtitle}</Text>
+      </View>
+
+      {props.rightActions && (
+        <View style={styles.menuItemRightActions}>{props.rightActions}</View>
+      )}
+    </View>
   )
 }
 
@@ -225,6 +304,28 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   menuList: {
-    paddingTop: 30,
+    paddingTop: 16,
+  },
+  menuItemContainer: {
+    flexDirection: 'row',
+    paddingVertical: 4,
+    marginVertical: 16,
+  },
+  menuItemText: {
+    flex: 3,
+    marginLeft: 12,
+  },
+  menuItemRightActions: {
+    flex: 0,
+  },
+  menuItemTitle: {
+    color: '#25345F',
+    fontSize: 15,
+    fontFamily: 'AvenirNext-Medium',
+  },
+  menuItemSubtitle: {
+    color: '#222222',
+    fontSize: 13,
+    fontFamily: 'AvenirNext-Regular',
   },
 })
